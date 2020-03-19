@@ -3,6 +3,8 @@
 const { expect } = require('chai');
 const { getWeek } = require('../week.js');
 const { relativeWeek } = require('../week.js');
+const { dayIn14Days } = require('../week.js');
+
 
 describe('Date', () => {
   describe('getWeek', () => {
@@ -96,6 +98,51 @@ describe('Date', () => {
       const semaine190320 = new Date(2020, 2, 19);
       const monday23032020 = new Date(2020, 2, 23);
       const result = relativeWeek(monday23032020.getTime(), semaine190320.getTime());
+      expect(result).to.be.equal(-1);
+    });
+  });
+  describe('dayIn14Days', () => {
+    it('should return 0 pour lundi 09032020 et CurrentWeek 19/03/20  ', () => {
+      const semaine190320 = new Date(2020, 2, 19);
+      const monday090320 = new Date(2020, 2, 9);
+      const result = dayIn14Days(monday090320.getTime(), semaine190320.getTime());
+      expect(result).to.be.equal(0);
+    });
+    it('should return 1 pour mardi 100320 et CurrentWeek 19/03/20  ', () => {
+      const semaine190320 = new Date(2020, 2, 19);
+      const tuesday100320 = new Date(2020, 2, 10);
+      const result = dayIn14Days(tuesday100320.getTime(), semaine190320.getTime());
+      expect(result).to.be.equal(1);
+    });
+    it('should return 7 pour lundi 160320 et CurrentWeek 19/03/20  ', () => {
+      const semaine190320 = new Date(2020, 2, 19);
+      const monday160320 = new Date(2020, 2, 16);
+      const result = dayIn14Days(monday160320.getTime(), semaine190320.getTime());
+      expect(result).to.be.equal(7);
+    });
+    it('should return 13 pour dimanche 220320 et CurrentWeek 19/03/20  ', () => {
+      const semaine190320 = new Date(2020, 2, 19);
+      const sunday22032020 = new Date(2020, 2, 22);
+      const result = dayIn14Days(sunday22032020.getTime(), semaine190320.getTime());
+      expect(result).to.be.equal(13);
+    });
+    it('should return -1 pour lundi 230320 et CurrentWeek 19/03/20  ', () => {
+      const semaine190320 = new Date(2020, 2, 19);
+      const monday23032020 = new Date(2020, 2, 23);
+      const result = dayIn14Days(monday23032020.getTime(), semaine190320.getTime());
+      expect(result).to.be.equal(-1);
+    });
+    it('should return -1  pour dimanche 08/03/2020 et CurrentWeek 19/03/20  ', () => {
+      const semaine190320 = new Date(2020, 2, 19);
+      const sunday08032020 = new Date(2020, 2, 8);
+      const result = dayIn14Days(sunday08032020.getTime(), semaine190320.getTime());
+      expect(result).to.be.equal(-1);
+    });
+    it('should return -1 pour dimanche 12/03/2019 et CurrentWeek 19/03/20  ', () => {
+      //  same Weeknumber but different year
+      const semaine190320 = new Date(2020, 2, 19);
+      const day12032020 = new Date(2019, 2, 19);
+      const result = dayIn14Days(day12032020.getTime(), semaine190320.getTime());
       expect(result).to.be.equal(-1);
     });
   });

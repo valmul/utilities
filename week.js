@@ -26,6 +26,11 @@ function relativeWeek(timestamp, currentTime = Date.now()) {
   if (typeof currentTime !== 'number' && !isNaN(currentTime)) {
     throw new Error('fnct relativeWeek called with invalid parameter');
   }
+  const currentDate = new Date(timestamp);
+  const currentWeek = new Date(currentTime);
+  if (currentDate.getFullYear() !== currentWeek.getFullYear()) {
+    return -1;
+  }
   if (getWeek(timestamp) === getWeek(currentTime)) {
     return 1;
   }
@@ -35,5 +40,18 @@ function relativeWeek(timestamp, currentTime = Date.now()) {
   return -1;
 }
 
+// return day index in an array [0..13] respresenting previous and current week days
+// return -1 if timestamp is not in the two weeks
+function dayIn14Days(timestamp, currentDate = Date.now()) {
+  const inputDate = new Date(timestamp);
+  const dayNumber = (inputDate.getDay() + 6) % 7;
+  if (relativeWeek(timestamp, currentDate) === -1) {
+    return -1;
+  }
+  const result = relativeWeek(timestamp, currentDate) * 7 + dayNumber;
+  return result;
+}
+
 exports.relativeWeek = relativeWeek;
 exports.getWeek = getWeek;
+exports.dayIn14Days = dayIn14Days;
