@@ -10,42 +10,42 @@ describe('Date', () => {
   describe('getWeek', () => {
     it('should return 1 pour 01/01/2020 ', () => {
       const date01012020 = new Date(2020, 0, 1);
-      const result = getWeek(date01012020);
+      const result = getWeek(date01012020.getTime());
       expect(result).to.be.equal(1);
     });
     it('should return 2 pour 07/01/2020 ', () => {
       const date07012020 = new Date(2020, 0, 7);
-      const result = getWeek(date07012020);
+      const result = getWeek(date07012020.getTime());
       expect(result).to.be.equal(2);
     });
     it('should return 12 pour 16/03/2020 ', () => {
       const date16032020 = new Date(2020, 2, 16);
-      const result = getWeek(date16032020);
+      const result = getWeek(date16032020.getTime());
       expect(result).to.be.equal(12);
     });
     it('should return 53 pour 28/12/2020 ', () => {
       const date28122020 = new Date(2020, 11, 28);
-      const result = getWeek(date28122020);
+      const result = getWeek(date28122020.getTime());
       expect(result).to.be.equal(53);
     });
     it('should return 52 pour 28/12/2021 ', () => {
       const date28122021 = new Date(2021, 11, 28);
-      const result = getWeek(date28122021);
+      const result = getWeek(date28122021.getTime());
       expect(result).to.be.equal(52);
     });
     it('should return 53 pour 01/01/2021 ', () => {
       const date01012021 = new Date(2021, 0, 1);
-      const result = getWeek(date01012021);
+      const result = getWeek(date01012021.getTime());
       expect(result).to.be.equal(53);
     });
     it('should return 1 pour 04/01/2021 ', () => {
       const date04012021 = new Date(2021, 0, 4);
-      const result = getWeek(date04012021);
+      const result = getWeek(date04012021.getTime());
       expect(result).to.be.equal(1);
     });
     it('should return 1 pour 29/12/2014 ', () => {
       const date29122014 = new Date(2014, 11, 29);
-      const result = getWeek(date29122014);
+      const result = getWeek(date29122014.getTime());
       expect(result).to.be.equal(1);
     });
   });

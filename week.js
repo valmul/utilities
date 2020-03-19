@@ -1,6 +1,9 @@
 /* eslint linebreak-style: ["error", "windows"] */
 
 function getWeek(timestamp) {
+  if (typeof timestamp !== 'number' && !isNaN(timestamp)) {
+    throw new Error('fnct relativeWeek called with invalid parameter');
+  }
   const inputDate = new Date(timestamp);
   const target = new Date(timestamp);
   const dayNumber = (inputDate.getDay() + 6) % 7;
